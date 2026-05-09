@@ -1,4 +1,4 @@
-# PROYECTO DE AUTOMATIZACIÓN QA - KARINA REGUERA
+# 🚀 PROYECTO DE AUTOMATIZACIÓN QA - KARINA REGUERA
 
 ## 📌 Descripción
 Proyecto de automatización de pruebas funcionales realizado con **Python**, **Selenium WebDriver** y **Pytest**.  
@@ -15,7 +15,9 @@ El objetivo es validar el correcto funcionamiento de una aplicación web mediant
 ## 🚀 Instalación
 Clonar el repositorio:
 
-git clone https://github.com/usuario/proyecto-qa.git
+```bash
+git clone https://github.com/KarinaReguera/PROYECTO-QA-KARINA-REGUERA.git
+```
 
 ## Instalación de dependencias
 pip install -r requirements.txt
@@ -28,20 +30,25 @@ pytest --html=report.html --self-contained-html
 - Test Inventario → Valida que los productos se muestren correctamente.
 - Test Cart → Comprueba la funcionalidad del carrito de compras.
 
-
 ## 📂 Estructura del proyecto
-PROYECTO-QA-KARINA-REGUERA/
-│── tests/                 # Casos de prueba automatizados
-│   ├── test_login.py      # Validación de login
-│   ├── test_inventario.py # Validación de inventario
-│   └── test_cart.py       # Validación de carrito de compras
-│── utils/                 # Clases y funciones auxiliares
-│   ├── LoginPage.py       # Instrucciones para el login
-│── conftest.py            # Configuración y fixtures de Pytest
-│── pytest.ini             # Parámetros de ejecución de Pytest
-│── requirements.txt       # Dependencias del proyecto
-│── README.md              # Documentación
-
+```
+📁 PROYECTO-QA-KARINA-REGUERA
+ │── 📁 tests/                 # Casos de prueba automatizados
+│   ├── 📄 test_login.py       # Validación de login
+│   ├── 📄 test_inventario.py  # Validación de inventario
+│   └── 📄 test_cart.py        # Validación de carrito de compras
+│── 📁 utils/                  # Clases y funciones auxiliares
+│   ├── 📄 LoginPage.py        # Instrucciones para el login
+│── 📄 conftest.py             # Configuración y fixtures de Pytest
+│── 📄 pytest.ini              # Parámetros de ejecución de Pytest
+│── 📄 requirements.txt        # Dependencias del proyecto
+│── 📄 README.md               # Documentación
+```
 
 📊 Reportes
-Los resultados se generan en formato HTML dentro del archivo report.html.
+Los resultados se generan en formato HTML dentro del archivo report.html
+
+
+## 🌐 Repositorio GitHub
+
+https://github.com/KarinaReguera/PROYECTO-QA-KARINA-REGUERA.git
