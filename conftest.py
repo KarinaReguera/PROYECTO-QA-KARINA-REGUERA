@@ -25,7 +25,7 @@ import pytest_html # Importo el módulo pytest_html para poder utilizarlo en la 
 @pytest.fixture
 def driver():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new") # 
+    options.add_argument("--headless=new")
     options.add_argument("--incognito")
 
     driver = webdriver.Chrome(options = options)
@@ -98,7 +98,7 @@ def pytest_runtest_makereport(item, call): #Se ejecuta después de cada fase (se
             extras.append(pytest_html.extras.png(str(file_name)))  # Agrega la captura de pantalla al informe HTML utilizando pytest_html.extras.png para indicar que se trata de una imagen PNG, y pasando la ruta del archivo de la captura de pantalla convertida a una cadena de texto. Esto permite que la captura de pantalla se muestre correctamente en el informe HTML generado por pytest, lo que facilita la identificación de los problemas durante la ejecución de los tests al mostrar la imagen del estado del navegador en el momento en que ocurrió el error.
 
             report.extras = extras  # Asigna la lista de extras actualizada al informe del test para que la información adicional de la captura de pantalla se incluya en el informe HTML generado por pytest. Esto asegura que la captura de pantalla se muestre correctamente en el informe HTML, lo que facilita la identificación de los problemas durante la ejecución de los tests al mostrar la imagen del estado del navegador en el momento en que ocurrió el error.
-            
+
 
 
 
