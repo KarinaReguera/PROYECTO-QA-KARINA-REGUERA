@@ -8,9 +8,14 @@ from selenium import webdriver # Importo el módulo webdriver de Selenium para c
 from selenium.webdriver.common.by import By  # Importo el módulo By para localizar elementos en la página web.
 import pytest  # Importo el módulo pytest para usar los fixtures y las aserciones en los test.
 
-def test_cart(login_in_driver):   # Paso el fixture "login_in_driver" que está definido en el archivo "conftest.py".
 
-    driver = login_in_driver  # Guardo en una variable "driver" el "login_in_driver" que es el fixture que hace el login y devuelve el driver con el login OK y redirigido a la página del inventario.
+
+
+#Los marcadores se ponen arriba de cada prueba y se definen en archivo pytest.ini
+@pytest.mark.smoke  # MARCADOR. llamo al marcador "smoke" dentro de la libreria de pytest
+def test_cart(driver_logged):   # Paso el fixture "login_in_driver" que está definido en el archivo "conftest.py".
+
+    driver = driver_logged  # Asigno el valor del fixture "driver_logged" a la variable "driver" para poder utilizarlo en el test. El fixture "driver_logged" se encarga de iniciar sesión en la aplicación antes de ejecutar el test, utilizando el fixture "driver" para interactuar con el navegador. Este fixture se utiliza en los tests que requieren que el usuario esté logueado para poder realizar las pruebas de automatización. 
 
 
     # Agregar un producto al carrito
@@ -44,6 +49,7 @@ def test_cart(login_in_driver):   # Paso el fixture "login_in_driver" que está 
     # Verificar que el producto en el carrito sea el mismo que se agregó
     assert producto_en_carrito == nombre_producto, "El producto en el carrito no coincide con el producto agregado" 
                 # Se verifica que el nombre del producto en el carrito sea igual al nombre del producto que se agregó, lo que indica que el producto correcto se agregó al carrito. Si no se cumple esta condición, se muestra un mensaje de error indicando que el producto en el carrito no coincide con el producto agregado.
+
 
 
 

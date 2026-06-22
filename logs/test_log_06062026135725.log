@@ -1,0 +1,5 @@
+2026-06-06 13:57:32,187 - INFO - talento tech - Inicializando el driver para el test-login_ok
+2026-06-06 13:57:34,856 - INFO - talento tech - Ingresando los datos de entrada para la prueba
+2026-06-06 13:57:34,856 - INFO - talento tech - Iniciando sesión...
+2026-06-06 13:57:34,887 - INFO - talento tech - Sesión iniciada correctamente
+2026-06-06 13:57:42,055 - INFO - talento tech - Inicializando el driver para el test-login_invalid_password

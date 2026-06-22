@@ -1,54 +1,45 @@
-# Este archivo contiene varias pruebas que verifica una cosa cada una.
-# como que el título de la página del inventario sea correcto, que se muestren los productos, que estén visibles los elementos de la UI (menu hamburguesa y filtro).
-# Cada prueba es independiente.
-
-
-
-
-
 from selenium import webdriver # Importo el módulo webdriver de Selenium para controlar el navegador.
 from selenium.webdriver.common.by import By  # Importo el módulo By para localizar elementos en la página web.
 import pytest  # Importo el módulo pytest para usar los fixtures y las aserciones en los test.
 
+from page.inventory_page import InventoryPage # Importo la clase InventoryPage desde el módulo page.inventory_page para poder utilizarla en los tests relacionados con el inventario.
 
-
-@pytest.fixture
-def driver_logged (login_in_driver): # El fixture driver_logged, depende del fixture login_in_driver, que hace el login y devuelve el driver con el login ya hecho, para que el test pueda usarlo sin tener que repetir el código de login en cada test.
-    
-    drive = login_in_driver  # El fixture login_in_driver, hace el login y devuelve el driver con el login ya hecho, para que el test pueda usarlo sin tener que repetir el código de login en cada test.
-    
-    return drive  # Devuelvo el driver con el login ya hecho, para que los test puedan usarlo sin tener que repetir el código de login en cada test.
+from page.login_page import LoginPage  # Importo la clase LoginPage desde el módulo page.login_page para poder utilizarla en los tests de inicio de sesión.
 
 
 
-def test_inventario_title(driver_logged):
-    
-    titulo = driver_logged.title    # Se obtiene el valor del title de la pagina.
-    
-    assert titulo == "Swag Labs", f"El título de la página es incorrecto, se esperaba 'Swag Labs'" 
-            #Se compara el valor del title con el valor esperado, si no coincide, se muestra un mensaje de error con el valor obtenido.  
+
+def test_inventario_title(driver_logged): # Se pasa la función globalizada creada en conftest.py, que se encarga de iniciar sesión antes de ejecutar el test, utilizando el fixture driver para interactuar con el navegador. Este fixture se utiliza en los tests que requieren que el usuario esté logueado para poder realizar las pruebas de automatización.
+
+    # En cada test se crea el OBJETO CONSTRUCTOR de las funciones relacionada con la página del inventario.
+    inventory_page = InventoryPage(driver_logged)   # Creo una instancia de la clase InventoryPage, pasando el driver_logged como argumento para poder interactuar con la página del inventario durante las pruebas.
+
+    titulo = inventory_page.obtener_titulo()
+
+    assert titulo == "Swag Labs", "El titulo de la pagina no es correcto"
+    # Utilizo una aserción para verificar que el título obtenido (titulo) es igual a "Swag Labs". Esto indica que el título de la página de inventario es correcto. Si la aserción falla, se mostrará el mensaje "El título del inventario no es correcto" para indicar que el título no coincide con lo esperado.
 
 
 
-def test_productos(driver_logged):
-    productos = driver_logged.find_elements(By.CLASS_NAME, "inventory_item")  
-            # Se buscan los elementos con la clase "inventory_item", que son los productos, y se guardan en una lista.
-    assert len(productos) > 0, f"Se esperaba encontrar productos visibles"
-            # Se verifica que la lista de productos no esté vacía. Si está vacía, se muestra un mensaje de error indicando que se esperaba encontrar productos visibles
+
+#Los marcadores se ponen arriba de cada prueba y se definen en archivo pytest.ini
+@pytest.mark.smoke  # MARCADOR. llamo al marcador "smoke" dentro de la libreria de pytest
+def test_productos_visibles(driver_logged):
+    inventory_page = InventoryPage(driver_logged)
+
+    productos = inventory_page.obtener_productos()
+    assert len(productos) > 0
+    # Utilizo una aserción para verificar que la cantidad de productos obtenidos (productos) es mayor a 0. Esto indica que hay productos visibles en la página de inventario. Si la aserción falla, se mostrará el mensaje "No hay productos visibles en el inventario" para indicar que no se encontraron productos en la página.
+
 
 
 
 def test_ui_elements(driver_logged):
-    menu = driver_logged.find_element(By.ID, "react-burger-menu-btn")  # Se busca el elemento del menú por su ID.
+    inventory_page = InventoryPage(driver_logged)
+    assert inventory_page.menu_visible(), "El menu no está presente en la pagina"
 
-    filtro = driver_logged.find_element(By.CLASS_NAME, "product_sort_container")  # Se busca el elemento del filtro por su clase.
-
-
-    assert menu.is_displayed(), "El ícono del menú no se muestra en la página del inventario" 
-            # Se verifica que el botón del menú esté visible, si no está visible, se muestra un mensaje de error indicando que el botón del menú no se muestra en la página de inventario.
-
-    assert filtro.is_displayed(), "El filtro de productos no se muestra en la página del inventario"
-            # Se verifica que el filtro de productos esté visible, si no está visible, se muestra un mensaje de error indicando que el filtro de productos no se muestra en la página de inventario.
+    assert inventory_page.filtro_visible(), "El filtro no está presente en la pagina"
+    # Utilizo aserciones para verificar que el menú y el filtro están visibles en la página de inventario. Si alguna de las aserciones falla, se mostrará un mensaje indicando que el elemento correspondiente no está presente en la página.
 
 
 
