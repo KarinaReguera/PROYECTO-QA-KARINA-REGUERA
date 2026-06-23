@@ -2,8 +2,9 @@ name: Tests automatizados
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   run-tests:
@@ -11,10 +12,10 @@ jobs:
 
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Configurar python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
@@ -24,7 +25,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Ejecutar pruebas
-        run: pytest
+        run: pytest --html=report.html --self-contained-html
 
       - name: Guardar reporte como artefacto
         uses: actions/upload-artifact@v4
